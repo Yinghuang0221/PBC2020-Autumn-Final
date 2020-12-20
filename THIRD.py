@@ -27,7 +27,7 @@ class StockTool(tk.Frame):
         self.button2 = tk.Button(self, text = "下一步", command = self.clickBtn2)
         
         self.button1.grid(row = 11, column = 1, sticky = tk.NE + tk.SW)
-        self.button2.grid(row = 11, column = 2, sticky = tk.NE + tk.SW)
+        self.button2.grid(row = 11, column = 3, sticky = tk.NE + tk.SW)
         
         # 給使用者輸入數字的6個地方
         self.entry1_1 = tk.Entry(self, width=10)
