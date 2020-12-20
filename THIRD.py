@@ -22,14 +22,12 @@ class StockTool(tk.Frame):
         self.lable5.grid(row = 6, column = 2)
         self.lable6.grid(row = 9, column = 2)
         
-        # 3個按鈕
+        # 2個按鈕
         self.button1 = tk.Button(self, text = "上一步", command = self.clickBtn1)
         self.button2 = tk.Button(self, text = "下一步", command = self.clickBtn2)
-        self.button3 = tk.Button(self, text = "離開", command = self.clickBtn3)
         
         self.button1.grid(row = 11, column = 1, sticky = tk.NE + tk.SW)
         self.button2.grid(row = 11, column = 2, sticky = tk.NE + tk.SW)
-        self.button3.grid(row = 11, column = 3, sticky = tk.NE + tk.SW)
         
         # 給使用者輸入數字的6個地方
         self.entry1_1 = tk.Entry(self, width=10)
@@ -51,9 +49,7 @@ class StockTool(tk.Frame):
         pass
     def clickBtn2(self):  # 下一步
         pass
-    def clickBtn3(self):  # 離開
-        pass
-        
+
 
 cal = StockTool()
 cal.master.title("My StockTool")
