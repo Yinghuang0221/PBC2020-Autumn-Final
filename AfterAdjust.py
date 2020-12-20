@@ -35,7 +35,7 @@ class PageOne(tk.Frame):
         f2 = tkFont.Font(size = 32, family = "Courier new")
         
         self.valueq1 = tk.IntVar()
-        self.lblq1 = tk.Label(self, text = '1. 如果我的投資價值超過20%，我會感到不安。')
+        self.lblq1 = tk.Label(self, text = '1. 如果我的投資價值超過20%，我會感到不安。', bg = 'Thistle')
         self.rdiq11 = tk.Radiobutton(self, text='非常同意',variable=self.valueq1,value=1)
         self.rdiq12 = tk.Radiobutton(self, text='同意',variable=self.valueq1,value=2)
         self.rdiq13 = tk.Radiobutton(self, text='普通',variable=self.valueq1,value=3)
@@ -49,7 +49,7 @@ class PageOne(tk.Frame):
         self.rdiq15.grid(row = 1, column = 4, sticky = tk.W)
         
         valueq2 = tk.IntVar()
-        self.lblq2 = tk.Label(self, text = '2. 為了能獲得更高的報酬，我願意接受較高的風險。')
+        self.lblq2 = tk.Label(self, text = '2. 為了能獲得更高的報酬，我願意接受較高的風險。', bg = 'Thistle')
         self.rdiq21 = tk.Radiobutton(self, text='非常不同意',variable=valueq2,value=1)
         self.rdiq22 = tk.Radiobutton(self, text='不同意',variable=valueq2,value=2)
         self.rdiq23 = tk.Radiobutton(self, text='普通',variable=valueq2,value=3)
@@ -63,7 +63,7 @@ class PageOne(tk.Frame):
         self.rdiq25.grid(row = 3, column = 4, sticky = tk.W)
         
         valueq3 = tk.IntVar()
-        self.lblq3 = tk.Label(self, text = '3. 您平時多久調整一次您的投資組合(指的是大方向的資產配置，而不是個股的選擇)')
+        self.lblq3 = tk.Label(self, text = '3. 您平時多久調整一次您的投資組合(指的是大方向的資產配置，而不是個股的選擇) ?', bg = 'Thistle')
         self.rdiq31 = tk.Radiobutton(self, text='只要一有損失就調整',variable=valueq3,value=1)
         self.rdiq32 = tk.Radiobutton(self, text='三年',variable=valueq3,value=2)
         self.rdiq33 = tk.Radiobutton(self, text='3-5年',variable=valueq3,value=3)
@@ -77,7 +77,7 @@ class PageOne(tk.Frame):
         self.rdiq35.grid(row = 5, column = 4, sticky = tk.W)
         
         valueq4 = tk.IntVar()
-        self.lblq4 = tk.Label(self, text = '4. 我要追求長期報酬，我可以忍受短期的價值波動)')
+        self.lblq4 = tk.Label(self, text = '4. 我要追求長期報酬，我可以忍受短期的價值波動。', bg = 'Thistle')
         self.rdiq41 = tk.Radiobutton(self, text='非常不同意',variable=valueq3,value=1)
         self.rdiq42 = tk.Radiobutton(self, text='不同意',variable=valueq4,value=2)
         self.rdiq43 = tk.Radiobutton(self, text='沒意見',variable=valueq4,value=3)
@@ -91,7 +91,7 @@ class PageOne(tk.Frame):
         self.rdiq45.grid(row = 7, column = 4, sticky = tk.W)
         
         valueq5 = tk.IntVar()
-        self.lblq5 = tk.Label(self, text = '5. 您對風險的接受程度)')
+        self.lblq5 = tk.Label(self, text = '5. 您對風險的接受程度 :', bg = 'Thistle')
         self.rdiq51 = tk.Radiobutton(self, text='極低風險接受者',variable=valueq5,value=1)
         self.rdiq52 = tk.Radiobutton(self, text='低風險接受者',variable=valueq5,value=2)
         self.rdiq53 = tk.Radiobutton(self, text='風險中立者',variable=valueq5,value=3)
@@ -105,7 +105,7 @@ class PageOne(tk.Frame):
         self.rdiq55.grid(row = 9, column = 4, sticky = tk.W)
         
         valueq6 = tk.IntVar()
-        self.lblq6 = tk.Label(self, text = '6. 您對金融市場及金融實務的了解)')
+        self.lblq6 = tk.Label(self, text = '6. 您對金融市場及金融實務的了解 :', bg = 'Thistle')
         self.rdiq61 = tk.Radiobutton(self, text='不清楚也沒興趣',variable=valueq6,value=1)
         self.rdiq62 = tk.Radiobutton(self, text='不是很清楚',variable=valueq6,value=2)
         self.rdiq63 = tk.Radiobutton(self, text='初淺了解(我只知道投資要多角化降低風險)',variable=valueq6,value=3)
@@ -119,7 +119,7 @@ class PageOne(tk.Frame):
         self.rdiq65.grid(row = 16, column = 0, columnspan = 5, sticky = tk.W)
         
         valueq7 = tk.IntVar()
-        self.lblq7 = tk.Label(self, text = '7. 我投資最大的要求是保值，安全；這比獲利更重要)')
+        self.lblq7 = tk.Label(self, text = '7. 我投資最大的要求是保值，安全；這比獲利更重要。', bg = 'Thistle')
         self.rdiq71 = tk.Radiobutton(self, text='非常同意',variable=valueq7,value=1)
         self.rdiq72 = tk.Radiobutton(self, text='同意',variable=valueq7,value=2)
         self.rdiq73 = tk.Radiobutton(self, text='沒意見',variable=valueq7,value=3)
@@ -133,7 +133,7 @@ class PageOne(tk.Frame):
         self.rdiq75.grid(row = 18, column = 4, sticky = tk.W)
         
         valueq8 = tk.IntVar()
-        self.lblq8 = tk.Label(self, text = '8. 當您做完一項投資決策後，您的感覺是)')
+        self.lblq8 = tk.Label(self, text = '8. 當您做完一項投資決策後，您的感覺是 :', bg = 'Thistle')
         self.rdiq81 = tk.Radiobutton(self, text='非常擔心',variable=valueq8,value=1)
         self.rdiq82 = tk.Radiobutton(self, text='擔心',variable=valueq8,value=2)
         self.rdiq83 = tk.Radiobutton(self, text='不放在心上',variable=valueq8,value=3)
@@ -147,7 +147,7 @@ class PageOne(tk.Frame):
         self.rdiq85.grid(row = 20, column = 4, sticky = tk.W)
         
         valueq9 = tk.IntVar()
-        self.lblq9 = tk.Label(self, text = '9. 長期來看，高風險會有高報酬補償，如果您做一個10-20年期的投資，您會選擇下列何者)')
+        self.lblq9 = tk.Label(self, text = '9. 長期來看，高風險會有高報酬補償，如果您做一個10-20年期的投資，您會選擇下列何者 ?', bg = 'Thistle')
         self.rdiq91 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-2%~11%之間，平均年報酬是4.1%',variable=valueq9,value=1)
         self.rdiq92 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-5%~14%之間，平均年報酬是4.7%',variable=valueq9,value=2)
         self.rdiq93 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-7%~17%之間，平均年報酬是5.0%',variable=valueq9,value=3)
