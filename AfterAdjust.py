@@ -30,10 +30,8 @@ class PageOne(tk.Frame):
         self.btu_frontpage.grid(row = 99, column = 0, sticky = tk.W)
         self.btu_nextpage.grid(row = 99, column = 4, sticky = tk.E)
         
-    def createWidgets(self):
-        f1 = tkFont.Font(size = 48, family = "Courier new")
-        f2 = tkFont.Font(size = 32, family = "Courier new")
-        
+    def createWidgets(self):      
+        # 9題題目與選項
         self.valueq1 = tk.IntVar()
         self.lblq1 = tk.Label(self, text = '1. 如果我的投資價值超過20%，我會感到不安。', bg = 'Thistle')
         self.rdiq11 = tk.Radiobutton(self, text='非常同意',variable=self.valueq1,value=1)
@@ -171,10 +169,11 @@ class PageTwo(tk.Frame):
         self.btu_frontpage.grid(row = 99, column = 1)
     
     def createWidgets(self):
-        # 標示文字        
-        self.lable1 = tk.Label(self, text = "投資預算區間:", bg = 'Thistle')
-        self.lable2 = tk.Label(self, text = "投資標的數目上限:", bg = "Thistle")
-        self.lable3 = tk.Label(self, text = "投資標的前一日收盤價區間:", bg = "Thistle")
+        f1 = tkFont.Font(size = 10)
+        # 三個條件給使用者填        
+        self.lable1 = tk.Label(self, text = "投資預算區間:", bg = 'Thistle', font=f1)
+        self.lable2 = tk.Label(self, text = "投資標的數目上限:", bg = "Thistle", font=f1)
+        self.lable3 = tk.Label(self, text = "投資標的前一日收盤價區間:", bg = "Thistle", font=f1)
         self.lable4 = tk.Label(self, text = "~")
         self.lable6 = tk.Label(self, text = "~")
         
@@ -183,22 +182,20 @@ class PageTwo(tk.Frame):
         self.lable3.grid(row = 8, column = 0, columnspan = 5, sticky = tk.NE + tk.SW)
         self.lable4.grid(row = 3, column = 2)
         self.lable6.grid(row = 9, column = 2)
-        
-
-        
+            
         # 給使用者輸入數字的5個地方
         self.entry1_1 = tk.Entry(self, width=10)
         self.entry1_2 = tk.Entry(self, width=10)
         self.entry2_1 = tk.Entry(self, width=10)
-
         self.entry3_1 = tk.Entry(self, width=10)
         self.entry3_2 = tk.Entry(self, width=10)
         
         self.entry1_1.grid(row = 3, column = 1)
         self.entry1_2.grid(row = 3, column = 3)
-        self.entry2_1.grid(row = 6, column = 1, columnspan = 5, sticky = tk.NE + tk.SW)
+        self.entry2_1.grid(row = 6, column = 1, columnspan = 3, sticky = tk.SW + tk.NE)
         self.entry3_1.grid(row = 9, column = 1)
         self.entry3_2.grid(row = 9, column = 3)
+
 if __name__ == "__main__":
     app = Project()
     app.geometry('700x700')
@@ -206,3 +203,4 @@ if __name__ == "__main__":
     app.grid_rowconfigure(0, weight=1)
     app.grid_columnconfigure(0, weight=1)
     app.mainloop()
+
