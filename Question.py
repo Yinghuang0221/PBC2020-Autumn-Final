@@ -62,6 +62,19 @@ class Qustion (tk.Frame):
         
         self.lblan = tk.Label(self, text = str('您的風險趨避程度為'))
         self.lblan.grid(row = 99, column = 2)
+        
+        # 2個按鈕
+        self.button1 = tk.Button(self, text = "上一步", command = self.clickBtn1)
+        self.button2 = tk.Button(self, text = "下一步", command = self.clickBtn2)
+       
+        self.button1.grid(row = 100, column = 1, sticky = tk.NE + tk.SW)
+        self.button2.grid(row = 100, column = 2, sticky = tk.NE + tk.SW)
+        
+    
+    def clickBtn1(self):  # 上一步
+        pass
+    def clickBtn2(self):  # 下一步
+        pass
     
 que = Qustion()
 que.master.title("Question")
