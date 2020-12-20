@@ -67,8 +67,8 @@ class Qustion (tk.Frame):
         self.button1 = tk.Button(self, text = "上一步", command = self.clickBtn1)
         self.button2 = tk.Button(self, text = "下一步", command = self.clickBtn2)
        
-        self.button1.grid(row = 100, column = 1, sticky = tk.NE + tk.SW)
-        self.button2.grid(row = 100, column = 2, sticky = tk.NE + tk.SW)
+        self.button1.grid(row = 100, column = 0, sticky = tk.W)
+        self.button2.grid(row = 100, column = 4, sticky = tk.E)
         
     
     def clickBtn1(self):  # 上一步
