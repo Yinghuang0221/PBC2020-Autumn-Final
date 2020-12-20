@@ -119,6 +119,7 @@ class PageTwo(tk.Frame):
         self.entry3_2.grid(row = 9, column = 3)
 if __name__ == "__main__":
     app = Project()
+    app.title('My Stock Tool')
     app.geometry('700x700')
     app.grid_rowconfigure(0, weight=1)
     app.grid_columnconfigure(0, weight=1)
