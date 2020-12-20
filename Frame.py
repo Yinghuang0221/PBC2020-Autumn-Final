@@ -17,7 +17,9 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, master)
         self.grid()
         self.btu1 =tk.Button(self, text="開始",command=lambda: master.switch_frame(PageOne))
-        self.btu1.grid(row = 15, column = 1)
+        self.btu1.grid(row = 1, column = 1)
+        self.btu1.grid_rowconfigure(1, weight=1)
+        self.btu1.grid_columnconfigure(1, weight=1)
 
 class PageOne(tk.Frame):
     def __init__(self, master):
@@ -115,4 +117,7 @@ class PageTwo(tk.Frame):
         self.entry3_2.grid(row = 9, column = 3)
 if __name__ == "__main__":
     app = Project()
+    app.geometry('700x700')
+    app.grid_rowconfigure(0, weight=1)
+    app.grid_columnconfigure(0, weight=1)
     app.mainloop()
