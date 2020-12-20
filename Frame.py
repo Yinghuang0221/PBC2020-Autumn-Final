@@ -85,6 +85,8 @@ class PageTwo(tk.Frame):
         self.createWidgets()
         self.btu_frontpage = tk.Button(self, text="上一步",command=lambda: master.switch_frame(PageOne))
         self.btu_frontpage.grid(row = 99, column = 1)
+        self.btu_nextpage = tk.Button(self, text="結果")
+        self.btu_nextpage.grid(row = 99, column = 3)
     
     def createWidgets(self):
         # 標示文字        
