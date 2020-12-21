@@ -1,4 +1,5 @@
 import os , csv , math , statistics
+import time
 #算各個標準差的平均
 def avg(std_list):
     summary = 0
@@ -51,18 +52,55 @@ def get_info(filename):
         variation /= 100
     #有些算不出來就ERROR
     else:
-        variation = "ERROR"
+        variation = 2
     #印出方便確認
-    print(filename.split(".")[0])
-    print(variation , int(stock_price*100) / 100)
+    #print(filename.split(".")[0])
+    #print(variation , int(stock_price*100) / 100)
     #暫時存在list裡? 在依照波動分類?
+    #if variation != "ERROR":  # 試寫分類 應該沒啥問題
+        #if (float(variation) >= 0.05) and ((int(stock_price*100) / 100) <= 100):
+            #print(filename.split(".")[0])
+            #print(variation , int(stock_price*100) / 100)
     stock_list.append([filename.split(".")[0] , variation , int(stock_price*100) / 100])
-    
-stock_list = []
+    stock_variation_list.append(variation)
 
+
+
+
+stock_list = []
+stock_variation_list = []
 filenames = get_excels()
 #開始跑每個資料
 for name in filenames:
     get_info(name)
-    
+
+
+print(len(stock_list))
+
+high_risk_list = []
+mid_risk_list = []
+low_risk_list = []
+
+for i in range(math.ceil(len(stock_list)/4)):
+    if stock_variation_list[i] != "ERROR":
+        min_idx = stock_variation_list.index(min(stock_variation_list))
+        low_risk_list.append(stock_list[min_idx])
+        stock_variation_list[min_idx] = 3
+
+
+for i in range(math.ceil(len(stock_list)/2)):
+    min_idx = stock_variation_list.index(min(stock_variation_list))
+    mid_risk_list.append(stock_list[min_idx])
+    stock_variation_list[min_idx] = 3
+
+
+for i in range(math.ceil(len(stock_list)/4)):
+    min_idx = stock_variation_list.index(min(stock_variation_list))
+    high_risk_list.append(stock_list[min_idx])
+    stock_variation_list[min_idx] = 3
+
+print(high_risk_list)
+
+
+
 
