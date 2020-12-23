@@ -32,13 +32,13 @@ class PageOne(tk.Frame):
         
     def createWidgets(self):      
         # 9題題目與選項
-        self.valueq1 = tk.IntVar()
+        valueq1 = tk.IntVar()
         self.lblq1 = tk.Label(self, text = '1. 如果我的投資價值超過20%，我會感到不安。', bg = 'Thistle')
-        self.rdiq11 = tk.Radiobutton(self, text='非常同意',variable=self.valueq1,value=1)
-        self.rdiq12 = tk.Radiobutton(self, text='同意',variable=self.valueq1,value=2)
-        self.rdiq13 = tk.Radiobutton(self, text='普通',variable=self.valueq1,value=3)
-        self.rdiq14 = tk.Radiobutton(self, text='不同意',variable=self.valueq1,value=4)
-        self.rdiq15 = tk.Radiobutton(self, text='非常不同意',variable=self.valueq1,value=5)
+        self.rdiq11 = tk.Radiobutton(self, text='非常同意',variable=valueq1,value=1)
+        self.rdiq12 = tk.Radiobutton(self, text='同意',variable=valueq1,value=2)
+        self.rdiq13 = tk.Radiobutton(self, text='普通',variable=valueq1,value=3)
+        self.rdiq14 = tk.Radiobutton(self, text='不同意',variable=valueq1,value=4)
+        self.rdiq15 = tk.Radiobutton(self, text='非常不同意',variable=valueq1,value=5)
         self.lblq1.grid(row = 0, column = 0, columnspan = 5, sticky = tk.W)
         self.rdiq11.grid(row = 1, column = 0, sticky = tk.W)
         self.rdiq12.grid(row = 1, column = 1, sticky = tk.W)
@@ -157,9 +157,41 @@ class PageOne(tk.Frame):
         self.rdiq93.grid(row = 24, column = 0, columnspan = 5, sticky = tk.W)
         self.rdiq94.grid(row = 25, column = 0, columnspan = 5, sticky = tk.W)
         self.rdiq95.grid(row = 26, column = 0, columnspan = 5, sticky = tk.W)
-        
-        self.lblan = tk.Label(self, text = str('您的風險趨避程度為'))
+    
+
+        # Get 所有value
+        def sum():
+            weight1 = valueq1.get()	
+            weight2 = valueq2.get()	
+            weight3 = valueq3.get()
+            weight4 = valueq4.get()
+            weight5 = valueq5.get()
+            weight6 = valueq6.get()
+            weight7 = valueq7.get()
+            weight8 = valueq8.get()
+            weight9 = valueq9.get()
+            total_weight = weight1+weight2+weight3+weight4+weight5+weight6+weight7+weight8+weight9
+            total_weight_str = str(total_weight)
+            return total_weight_str
+        def update():
+            weight_value.set(sum())
+
+        weight_value = tk.StringVar()
+        weight_value.set(sum())
+
+        # 利用按鈕更新獲得的value
+        self.lblan = tk.Button(self, text = str('您的風險趨避程度為'), command = lambda: [sum(),
+                                 update()] )
+        self.vale = tk.Label(self, textvariable = weight_value)
+
+        self.vale.grid(row = 98, column = 3)
         self.lblan.grid(row = 98, column = 2)
+
+            
+
+
+
+
 
 class PageTwo(tk.Frame):
     def __init__(self, master):
