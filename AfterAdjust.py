@@ -288,19 +288,70 @@ class PageTwo(tk.Frame):
         self.lable3.grid(row=8, column=0, columnspan=5, sticky=tk.NE+tk.SW)
         self.lable4.grid(row=3, column=2)
         self.lable6.grid(row=9, column=2)
+        
+        entry1__1 = tk.IntVar()
+        entry1__2 = tk.IntVar()
+        entry2__1 = tk.IntVar()
+        entry3__1 = tk.IntVar()
+        entry3__2 = tk.IntVar()
 
         # 給使用者輸入數字的5個地方
-        self.entry1_1 = tk.Entry(self, width=10)
-        self.entry1_2 = tk.Entry(self, width=10)
-        self.entry2_1 = tk.Entry(self, width=10)
-        self.entry3_1 = tk.Entry(self, width=10)
-        self.entry3_2 = tk.Entry(self, width=10)
+        self.entry1_1 = tk.Entry(self,textvariable=entry1__1, width=10)
+        self.entry1_2 = tk.Entry(self,textvariable=entry1__2, width=10)
+        self.entry2_1 = tk.Entry(self,textvariable=entry2__1, width=10)
+        self.entry3_1 = tk.Entry(self,textvariable=entry3__1, width=10)
+        self.entry3_2 = tk.Entry(self,textvariable=entry3__2, width=10)
 
         self.entry1_1.grid(row=3, column=1)
         self.entry1_2.grid(row=3, column=3)
         self.entry2_1.grid(row=6, column=1, columnspan=3, sticky=tk.SW+tk.NE)
         self.entry3_1.grid(row=9, column=1)
         self.entry3_2.grid(row=9, column=3)
+        
+        # 利用按鈕更新獲得的value
+
+        def getbudget1():
+            low = entry1__1.get()
+            print(low)
+            return low
+        def getbudget2():
+            high = entry1__2.get()
+            print(high)
+            return high
+        def gettaramount():
+            taramount = entry2__1.get()
+            print(taramount)
+            return taramount
+        def gettarprice1():
+            low_p = entry3__1.get()
+            print(low_p)
+            return low_p
+        def gettarprice2():
+            high_p = entry3__2.get()
+            print(high_p)
+            return high_p
+        
+        def update():
+            budget_low.set(getbudget1())
+            budget_high.set(getbudget2())
+            target_amount.set(gettaramount())
+            price_low.set(gettarprice1())
+            price_high.set(gettarprice2())
+
+        budget_low = tk.IntVar()
+        budget_high = tk.IntVar()
+        target_amount = tk.IntVar()
+        price_low = tk.IntVar()
+        price_high = tk.IntVar()
+        budget_low.set(getbudget1())
+        budget_high.set(getbudget2())
+        target_amount.set(gettaramount())
+        price_low.set(gettarprice1())
+        price_high.set(gettarprice2())
+
+        self.lblan = tk.Button(self, text=str('儲存資料'),
+                               command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update()])
+        self.lblan.grid(row=98, column=2)
 
 if __name__ == "__main__":
     app = Project()
