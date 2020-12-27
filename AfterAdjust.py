@@ -5,7 +5,7 @@ from urllib.request import urlopen
 import io
 
 # 放網路上的圖
-url = 'https://i.imgur.com/X1rrD5p.jpeg'
+url = 'https://i.imgur.com/GwjCqgK.png'
 image_bytes = urlopen(url).read()
 # internal data file
 data_stream = io.BytesIO(image_bytes)
@@ -39,14 +39,14 @@ class StartPage(tk.Frame):
         self.grid()
         self.createWidgets()
         self.btu1 = tk.Button(self, text="Get started!",
-                              command=lambda: master.switch_frame(PageOne))
+                              command=lambda: master.switch_frame(PageOne), bg="#E0FFFF")
         self.btu1.grid(row=1, column=0)
         self.btu1.grid_rowconfigure(1, weight=1)
         self.btu1.grid_columnconfigure(1, weight=1)
     def createWidgets(self):
         self.tk_image = ImageTk.PhotoImage(pil_image)
         # put the image on a typical widget
-        self.label = tk.Label(self, image=self.tk_image, bg='brown')
+        self.label = tk.Label(self, image=self.tk_image, bg='lightblue')
         self.label.grid(row = 0, column = 0, padx=5, pady=5)
 
 
@@ -261,7 +261,7 @@ class PageOne(tk.Frame):
         weight_value.set(sum())
 
         # 利用按鈕更新獲得的value
-        self.lblan = tk.Button(self, text=str('您的風險趨避程度為'),
+        self.lblan = tk.Button(self, text=str('您的風險趨避程度為'), bg="Thistle",
                                command=lambda: [sum(), update()])
         self.vale = tk.Label(self, textvariable=weight_value)
         
@@ -358,7 +358,7 @@ class PageTwo(tk.Frame):
         price_low.set(gettarprice1())
         price_high.set(gettarprice2())
 
-        self.lblan = tk.Button(self, text=str('儲存資料'),
+        self.lblan = tk.Button(self, text=str('儲存資料'), bg="Thistle",
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update()])
         self.lblan.grid(row=98, column=2)
 
