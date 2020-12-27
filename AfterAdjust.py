@@ -259,8 +259,11 @@ class PageTwo(tk.Frame):
         self.createWidgets()
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageOne))
+        self.btu_nextpage = tk.Button(self, text="下一步",
+                                      command=lambda: master.switch_frame(PageThree))
         self.btu_frontpage.grid(row=99, column=1)
-
+        self.btu_nextpage.grid(row=99, column=3)
+        
     def createWidgets(self):
         f1 = tkFont.Font(size=10)
         # 三個條件給使用者填
@@ -289,6 +292,10 @@ class PageTwo(tk.Frame):
         self.entry2_1.grid(row=6, column=1, columnspan=3, sticky=tk.SW+tk.NE)
         self.entry3_1.grid(row=9, column=1)
         self.entry3_2.grid(row=9, column=3)
+
+class PageThree(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)        
 
 if __name__ == "__main__":
     app = Project()
