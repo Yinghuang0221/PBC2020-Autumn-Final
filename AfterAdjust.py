@@ -38,48 +38,44 @@ def strB2Q(s):
 
 
 def result():
-    global amt  #標的個數
-    available_list = []  #可行的標的
-    #######依風險程度決定讀中高低檔#############
+    global amt  # 標的個數
+    available_list = []  # 可行的標的
+    # 依風險程度決定讀中高低檔
     if 0 <= risk_level <= 15 :
         filename = 'low_risk_list.csv'
     elif 16 <= risk_level <= 30 :
         filename = 'mid_risk_list.csv'
     elif 31 <= risk_level <= 45 :      
         filename = 'high_risk_list.csv'
-    #######依風險程度決定讀中高低檔#############結束
     
-    ######將csv內容讀進陣列#####
+    # 將csv內容讀進陣列
     csv_list = []
     with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
         csvf = csv.reader(csvfile)
         for line in csvf :
             csv_list.append(line)
-    ##########結束############
     
-    #########新增可行標的之陣列#########
+    # 新增可行標的之陣列
     for i in range(1 , len(csv_list)):
         csv_list[i][3] = float(csv_list[i][3])       
         if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
-            #num = len(output) + 1
+            # num = len(output) + 1
             available_list.append([csv_list[i][1] , csv_list[i][3]])
     if len(available_list) < amt:
         amt = len(available_list)
     
     
-    llist = random.sample(available_list , amt) #隨機抽樣推薦
-    ##輸出部分#####
+    llist = random.sample(available_list , amt) # 隨機抽樣推薦
     rresult = ''  #最終輸出之陣列
     for data in llist:
-        ##半形英文字轉全形，較易閱讀
+        # 半形英文字轉全形，較易閱讀
         string = strB2Q(data[0])
         space = 2 * (20 - len(string))
-        #print(len(data[0]) , space)
-        #space = data[0] + space[len(data[0]):]
+        # print(len(data[0]) , space)
+        # space = data[0] + space[len(data[0]):]
         
-        ##每一筆資料結束後換行
+        # 每一筆資料結束後換行
         rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'
-        
     return rresult
 
 
