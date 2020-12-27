@@ -4,7 +4,8 @@ from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
 import csv
-# 放網路上的圖
+
+# 放網路上的圖為封面圖片
 url = 'https://i.imgur.com/X1rrD5p.jpeg'
 image_bytes = urlopen(url).read()
 # internal data file
@@ -30,20 +31,21 @@ def result():
         filename = 'mid_risk_list.csv'
     elif 31 <= risk_level <= 45 :      
         filename = 'high_risk_list.csv'
+    
     count = 0
     csv_list = []
-    with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
+    with open (file=filename, mode='r', encoding="utf-8-sig") as csvfile :
         csvf = csv.reader(csvfile)
         for line in csvf :
             csv_list.append(line)
             
-    for i in range(1 , len(csv_list)):
+    for i in range(1, len(csv_list)):
         csv_list[i][3] = float(csv_list[i][3])
         if count >= final_list["amt"]:
             break
         else:
             if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
-              output.append([csv_list[i][1] , csv_list[i][3]])  
+              output.append([csv_list[i][1], csv_list[i][3]])  
             count += 1        
     print(output)
 
@@ -264,8 +266,8 @@ class PageOne(tk.Frame):
         self.rdiq94.grid(row=25, column=0, columnspan=5, sticky=tk.W)
         self.rdiq95.grid(row=26, column=0, columnspan=5, sticky=tk.W)
 
-        # Get所使用者回答之value並相加
-
+       
+       # Get所使用者回答之value並相加
         def sum():
             global risk_level
             weight1 = valueq1.get()
@@ -281,6 +283,12 @@ class PageOne(tk.Frame):
                             weight6 + weight7 + weight8 + weight9)
             risk_level = total_weight
             total_weight_str = str(total_weight)
+            
+            # 檢查使用者是否填完所有題目，回傳結果
+            if weight1==0 or weight2==0 or weight3==0 or weight4==0 or weight5==0 or weight6==0 or weight7==0 or weight8==0 or  weight9==0:
+                total_weight_str = "  您還沒填完所有題目喔!"
+            else:
+                total_weight_str = str(total_weight)
             return total_weight_str
 
         def update():
@@ -293,7 +301,6 @@ class PageOne(tk.Frame):
         self.lblan = tk.Button(self, text=str('您的風險趨避程度為'),
                                command=lambda: [sum(), update()])
         self.vale = tk.Label(self, textvariable=weight_value)
-
         self.vale.grid(row=98, column=3)
         self.lblan.grid(row=98, column=2)
 
@@ -346,7 +353,6 @@ class PageTwo(tk.Frame):
         self.entry3_2.grid(row=9, column=3)
         
         # 利用按鈕更新獲得的value
-
         def getbudget1():
             low = entry1__1.get()
             return low
@@ -395,12 +401,11 @@ class PageTwo(tk.Frame):
         self.lblan = tk.Button(self, text=str('儲存資料'),
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
         self.lblan.grid(row=98, column=2)
-        
+  
+  
 class PageThree(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)        
-        
-
 
 if __name__ == "__main__":
     app = Project()
