@@ -304,7 +304,11 @@ class PageTwo(tk.Frame):
         self.createWidgets()
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageOne))
+        self.btu_nextpage = tk.Button(self, text="下一步",
+                                       command=lambda: master.switch_frame(PageThree))
         self.btu_frontpage.grid(row=99, column=1)
+        self.btu_nextpage.grid(row=99, column=3)
+        
 
     def createWidgets(self):
         f1 = tkFont.Font(size=10)
@@ -392,6 +396,11 @@ class PageTwo(tk.Frame):
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
         self.lblan.grid(row=98, column=2)
         
+class PageThree(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)        
+        
+
 
 if __name__ == "__main__":
     app = Project()
