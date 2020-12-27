@@ -32,7 +32,7 @@ class StartPage(tk.Frame):
         self.canvas = tk.Canvas(self, width="600", height="300", bg = 'white')
         self.canvas.grid(row = 0, column = 0,  sticky = tk.NE + tk.SW, padx = 1, pady = 3)
 
-        self.img=Image.open("capm.png")
+        self.img=Image.open("C://Users//許嘉城//Desktop//junior//商管程//期末專案//capm.png")
         self.pic = ImageTk.PhotoImage(self.img)
         self.canvas.create_image(400, 200, image = self.pic, anchor = tk.CENTER)
 
@@ -113,7 +113,7 @@ class PageOne(tk.Frame):
         valueq4 = tk.IntVar()
         self.lblq4 = tk.Label(self, text='4. 我要追求長期報酬，我可以忍受短期的價值波動。',
                               bg='Thistle')
-        self.rdiq41 = tk.Radiobutton(self, text='非常不同意', variable=valueq3,
+        self.rdiq41 = tk.Radiobutton(self, text='非常不同意', variable=valueq4,
                                      value=1)
         self.rdiq42 = tk.Radiobutton(self, text='不同意', variable=valueq4,
                                      value=2)
