@@ -3,6 +3,7 @@ import tkinter.font as tkFont
 from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
+import csv
 # 放網路上的圖
 url = 'https://i.imgur.com/X1rrD5p.jpeg'
 image_bytes = urlopen(url).read()
@@ -16,6 +17,35 @@ w, h = pil_image.size
 # split off image file name
 fname = url.split('/')[-1]
 sf = "{} ({}x{})".format(fname, w, h)
+
+global risk_level
+output = []
+final_list = dict()
+
+def result():
+    output = []
+    if 0 <= risk_level <= 15 :
+        filename = 'low_risk_list.csv'
+    elif 16 <= risk_level <= 30 :
+        filename = 'mid_risk_list.csv'
+    elif 31 <= risk_level <= 45 :      
+        filename = 'high_risk_list.csv'
+    count = 0
+    csv_list = []
+    with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
+        csvf = csv.reader(csvfile)
+        for line in csvf :
+            csv_list.append(line)
+            
+    for i in range(1 , len(csv_list)):
+        csv_list[i][3] = float(csv_list[i][3])
+        if count >= final_list["amt"]:
+            break
+        else:
+            if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
+              output.append([csv_list[i][1] , csv_list[i][3]])  
+            count += 1        
+    print(output)
 
 
 class Project(tk.Tk):
@@ -235,7 +265,9 @@ class PageOne(tk.Frame):
         self.rdiq95.grid(row=26, column=0, columnspan=5, sticky=tk.W)
 
         # Get所使用者回答之value並相加
+
         def sum():
+            global risk_level
             weight1 = valueq1.get()
             weight2 = valueq2.get()
             weight3 = valueq3.get()
@@ -247,6 +279,7 @@ class PageOne(tk.Frame):
             weight9 = valueq9.get()
             total_weight = (weight1 + weight2 + weight3 + weight4 + weight5 +
                             weight6 + weight7 + weight8 + weight9)
+            risk_level = total_weight
             total_weight_str = str(total_weight)
             return total_weight_str
 
@@ -271,11 +304,7 @@ class PageTwo(tk.Frame):
         self.createWidgets()
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageOne))
-        self.btu_nextpage = tk.Button(self, text="下一步",
-                                       command=lambda: master.switch_frame(PageThree))
         self.btu_frontpage.grid(row=99, column=1)
-        self.btu_nextpage.grid(row=99, column=3)
-        
 
     def createWidgets(self):
         f1 = tkFont.Font(size=10)
@@ -316,23 +345,18 @@ class PageTwo(tk.Frame):
 
         def getbudget1():
             low = entry1__1.get()
-            print(low)
             return low
         def getbudget2():
             high = entry1__2.get()
-            print(high)
             return high
         def gettaramount():
             taramount = entry2__1.get()
-            print(taramount)
             return taramount
         def gettarprice1():
             low_p = entry3__1.get()
-            print(low_p)
             return low_p
         def gettarprice2():
             high_p = entry3__2.get()
-            print(high_p)
             return high_p
         
         def update():
@@ -341,26 +365,34 @@ class PageTwo(tk.Frame):
             target_amount.set(gettaramount())
             price_low.set(gettarprice1())
             price_high.set(gettarprice2())
+            
+        def get_final_data():
+            final_list['bug1'] = float(getbudget1())
+            final_list['bug2'] = float(getbudget2())
+            final_list['amt'] = int(gettaramount())
+            final_list['price1'] = float(gettarprice1())
+            final_list['price2'] = float(gettarprice2())
+            print(type(risk_level))
+            print(final_list)
+    
 
         budget_low = tk.IntVar()
         budget_high = tk.IntVar()
-        target_amount = tk.IntVar()
+        target_amount = tk.IntVar()        
         price_low = tk.IntVar()
         price_high = tk.IntVar()
+        
         budget_low.set(getbudget1())
         budget_high.set(getbudget2())
         target_amount.set(gettaramount())
         price_low.set(gettarprice1())
         price_high.set(gettarprice2())
-
-        self.lblan = tk.Button(self, text=str('儲存資料'),
-                               command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update()])
-        self.lblan.grid(row=98, column=2)
-
-class PageThree(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)        
         
+        self.lblan = tk.Button(self, text=str('儲存資料'),
+                               command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
+        self.lblan.grid(row=98, column=2)
+        
+
 if __name__ == "__main__":
     app = Project()
     app.geometry('700x700')
