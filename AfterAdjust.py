@@ -63,7 +63,9 @@ def result():
         csv_list[i][3] = float(csv_list[i][3])       
         if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
             #num = len(output) + 1
-            available_list.append([csv_list[i][1] , csv_list[i][3]])  
+            available_list.append([csv_list[i][1] , csv_list[i][3]])
+    if len(available_list) < amt:
+        amt = len(available_list)
     
     
     llist = random.sample(available_list , amt) #隨機抽樣推薦
