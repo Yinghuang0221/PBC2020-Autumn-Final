@@ -207,7 +207,7 @@ class PageOne(tk.Frame):
         self.rdiq45.grid(row=7, column=4, sticky=tk.W)
 
         valueq5 = tk.IntVar()
-        self.lblq5 = tk.Label(self, text='5. 您對風險的接受程度 :'+" "*167, bg='Thistle')
+        self.lblq5 = tk.Label(self, text='5. 您自認為對風險的接受程度 :'+" "*167, bg='Thistle')
         self.rdiq51 = tk.Radiobutton(self, text='極低風險接受者', variable=valueq5,
                                      value=1)
         self.rdiq52 = tk.Radiobutton(self, text='低風險接受者', variable=valueq5,
@@ -446,7 +446,7 @@ class PageThree(tk.Frame):
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageTwo))
         self.btu_frontpage.grid(row=99, column=0)
-        f1 = tkFont.Font(size=12)
+        f1 = tkFont.Font(size=18)
         risk_type = tk.StringVar()  # 設定需要呈現的字串資料型態
         lst1 = tk.StringVar()
         
@@ -469,10 +469,10 @@ class PageThree(tk.Frame):
         # 最後做出所有Label
         self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font=f1)
         self.type.grid(row=2, column=0)
-        self.type = tk.Label(self, text = "依據您的條件，我們推薦您投資下列標的", font=f1)
-        self.type.grid(row=3, column=0)
-        self.type = tk.Label(self, textvariable = lst1, font=f1)
-        self.type.grid(row=4, column=0, sticky=tk.W)
+        self.type = tk.Label(self, text = "依據您的條件，我們推薦您投資下列標的 :")
+        self.type.grid(row=4, column=0)
+        self.type = tk.Label(self, textvariable = lst1)
+        self.type.grid(row=6, column=0, sticky=tk.W)
 
 
 if __name__ == "__main__":
