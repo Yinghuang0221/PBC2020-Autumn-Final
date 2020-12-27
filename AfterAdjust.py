@@ -67,7 +67,7 @@ def result():
         amt = len(available_list)
     if amt > 25:
         amt = 25
-    
+
     
     llist = random.sample(available_list , amt) # 隨機抽樣推薦
     rresult = ''  #最終輸出之陣列
@@ -448,7 +448,8 @@ class PageThree(tk.Frame):
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageTwo))
         self.btu_frontpage.grid(row=99, column=0)
-        f1 = tkFont.Font(size=18)
+        f1 = tkFont.Font(size=20)
+        f2 = tkFont.Font(size=13)
         risk_type = tk.StringVar()  # 設定需要呈現的字串資料型態
         lst1 = tk.StringVar()
         
@@ -471,9 +472,9 @@ class PageThree(tk.Frame):
         # 最後做出所有Label
         self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font=f1)
         self.type.grid(row=2, column=0)
-        self.type = tk.Label(self, text = "依據您的條件，我們推薦您投資下列標的 :")
+        self.type = tk.Label(self, text = "依據您的條件，我們推薦您投資下列標的 :", font=f2)
         self.type.grid(row=4, column=0)
-        self.type = tk.Label(self, textvariable = lst1)
+        self.type = tk.Label(self, textvariable = lst1, font=f2)
         self.type.grid(row=6, column=0, sticky=tk.W)
 
 
