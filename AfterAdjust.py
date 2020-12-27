@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
 import csv
+import random
 # 放網路上的圖
 url = 'https://i.imgur.com/X1rrD5p.jpeg'
 image_bytes = urlopen(url).read()
@@ -21,7 +22,7 @@ sf = "{} ({}x{})".format(fname, w, h)
 
 
 global risk_level
-
+global amt
 output = []
 final_list = dict()
 
@@ -38,6 +39,7 @@ def strB2Q(s):
     return rstring
 
 def result():
+    global amt
     output = []
     if 0 <= risk_level <= 15 :
         filename = 'low_risk_list.csv'
@@ -45,7 +47,6 @@ def result():
         filename = 'mid_risk_list.csv'
     elif 31 <= risk_level <= 45 :      
         filename = 'high_risk_list.csv'
-    count = 0
     csv_list = []
     with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
         csvf = csv.reader(csvfile)
@@ -53,16 +54,16 @@ def result():
             csv_list.append(line)
             
     for i in range(1 , len(csv_list)):
-        csv_list[i][3] = float(csv_list[i][3])
-        if count >= final_list["amt"]:
-            break
-        else:
-            if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
-              output.append([csv_list[i][1] , csv_list[i][3]])  
-            count += 1        
+        csv_list[i][3] = float(csv_list[i][3])       
+        if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
+            #num = len(output) + 1
+            output.append([csv_list[i][1] , csv_list[i][3]])  
+    
+    
+    llist = random.sample(output , amt)
     
     rresult = ''
-    for data in output:
+    for data in llist:
         string = strB2Q(data[0])
         space = 2 * (20 - len(string))
         #print(len(data[0]) , space)
@@ -71,7 +72,7 @@ def result():
         rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'
         
     return rresult
-
+    
 
 class Project(tk.Tk):
     def __init__(self):
@@ -397,10 +398,11 @@ class PageTwo(tk.Frame):
             price_high.set(gettarprice2())
             
         def get_final_data():
-
+            global amt
             final_list['bug1'] = float(getbudget1())
             final_list['bug2'] = float(getbudget2())
             final_list['amt'] = int(gettaramount())
+            amt = int(gettaramount())
             final_list['price1'] = float(gettarprice1())
             final_list['price2'] = float(gettarprice2())
 
