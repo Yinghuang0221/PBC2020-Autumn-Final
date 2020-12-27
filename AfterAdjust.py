@@ -1,6 +1,21 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from PIL import Image, ImageTk
+from urllib.request import urlopen
+import io
+# 放網路上的圖
+url = 'https://i.imgur.com/X1rrD5p.jpeg'
+image_bytes = urlopen(url).read()
+# internal data file
+data_stream = io.BytesIO(image_bytes)
+# open as a PIL image object
+pil_image = Image.open(data_stream)
+# optionally show image info
+# get the size of the image
+w, h = pil_image.size
+# split off image file name
+fname = url.split('/')[-1]
+sf = "{} ({}x{})".format(fname, w, h)
 
 
 class Project(tk.Tk):
@@ -28,13 +43,10 @@ class StartPage(tk.Frame):
         self.btu1.grid_rowconfigure(1, weight=1)
         self.btu1.grid_columnconfigure(1, weight=1)
     def createWidgets(self):
-
-        self.canvas = tk.Canvas(self, width="600", height="300", bg = 'white')
-        self.canvas.grid(row = 0, column = 0,  sticky = tk.NE + tk.SW, padx = 1, pady = 3)
-
-        self.img=Image.open("C://Users//許嘉城//Desktop//junior//商管程//期末專案//capm.png")
-        self.pic = ImageTk.PhotoImage(self.img)
-        self.canvas.create_image(400, 200, image = self.pic, anchor = tk.CENTER)
+        self.tk_image = ImageTk.PhotoImage(pil_image)
+        # put the image on a typical widget
+        self.label = tk.Label(self, image=self.tk_image, bg='brown')
+        self.label.grid(row = 0, column = 0, padx=5, pady=5)
 
 
 class PageOne(tk.Frame):
@@ -259,11 +271,8 @@ class PageTwo(tk.Frame):
         self.createWidgets()
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageOne))
-        self.btu_nextpage = tk.Button(self, text="下一步",
-                                      command=lambda: master.switch_frame(PageThree))
         self.btu_frontpage.grid(row=99, column=1)
-        self.btu_nextpage.grid(row=99, column=3)
-        
+
     def createWidgets(self):
         f1 = tkFont.Font(size=10)
         # 三個條件給使用者填
@@ -292,10 +301,6 @@ class PageTwo(tk.Frame):
         self.entry2_1.grid(row=6, column=1, columnspan=3, sticky=tk.SW+tk.NE)
         self.entry3_1.grid(row=9, column=1)
         self.entry3_2.grid(row=9, column=3)
-
-class PageThree(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)        
 
 if __name__ == "__main__":
     app = Project()
