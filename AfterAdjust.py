@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from PIL import Image, ImageTk
 
 
 class Project(tk.Tk):
@@ -20,11 +21,20 @@ class StartPage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.grid()
+        self.createWidgets()
         self.btu1 = tk.Button(self, text="開始",
                               command=lambda: master.switch_frame(PageOne))
-        self.btu1.grid(row=1, column=1)
+        self.btu1.grid(row=1, column=0)
         self.btu1.grid_rowconfigure(1, weight=1)
         self.btu1.grid_columnconfigure(1, weight=1)
+    def createWidgets(self):
+
+        self.canvas = tk.Canvas(self, width="600", height="300", bg = 'white')
+        self.canvas.grid(row = 0, column = 0,  sticky = tk.NE + tk.SW, padx = 1, pady = 3)
+
+        self.img=Image.open("capm.png")
+        self.pic = ImageTk.PhotoImage(self.img)
+        self.canvas.create_image(400, 200, image = self.pic, anchor = tk.CENTER)
 
 
 class PageOne(tk.Frame):
@@ -287,4 +297,3 @@ if __name__ == "__main__":
     app.grid_rowconfigure(0, weight=1)
     app.grid_columnconfigure(0, weight=1)
     app.mainloop()
-
