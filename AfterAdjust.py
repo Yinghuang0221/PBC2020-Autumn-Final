@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
 import csv
+import random
 
 # 放網路上的圖
 url = 'https://i.imgur.com/GwjCqgK.png'
@@ -21,6 +22,7 @@ sf = "{} ({}x{})".format(fname, w, h)
 
 
 global risk_level
+global amt
 output = []
 final_list = dict()
 
@@ -315,6 +317,7 @@ class PageOne(tk.Frame):
                 total_weight_str = "    您還沒填完所有題目喔!"
             else:
                 total_weight_str = str(total_weight)
+            risk_level = total_weight
             # 回傳最後相加的value
             return total_weight_str
 
@@ -408,13 +411,14 @@ class PageTwo(tk.Frame):
         
         # 把資料轉換型態以便之後計算的函式
         def get_final_data():
-
+            global risk_level
+            global amt
             final_list['bug1'] = float(getbudget1())
             final_list['bug2'] = float(getbudget2())
             final_list['amt'] = int(gettaramount())
             final_list['price1'] = float(gettarprice1())
             final_list['price2'] = float(gettarprice2())
-
+            amt = gettaramount()
             print(type(risk_level))
             print(final_list)
     
@@ -448,6 +452,7 @@ class PageThree(tk.Frame):
         
         # 以風險權重決定出來字串，會放在Label上
         def risk_1():
+            global risk_level
             if 0 <= risk_level <= 15 :
                 risk_type = '您是低風險接受者'
 
