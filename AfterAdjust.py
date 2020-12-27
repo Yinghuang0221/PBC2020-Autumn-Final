@@ -209,7 +209,7 @@ class PageOne(tk.Frame):
         self.rdiq45.grid(row=7, column=4, sticky=tk.W)
 
         valueq5 = tk.IntVar()
-        self.lblq5 = tk.Label(self, text='5. 您自認為對風險的接受程度 :'+" "*167, bg='Thistle')
+        self.lblq5 = tk.Label(self, text='5. 您自認為對風險的接受程度 :'+" "*155, bg='Thistle')
         self.rdiq51 = tk.Radiobutton(self, text='極低風險接受者', variable=valueq5,
                                      value=1)
         self.rdiq52 = tk.Radiobutton(self, text='低風險接受者', variable=valueq5,
