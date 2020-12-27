@@ -4,9 +4,9 @@ from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
 import csv
-import random
+
 # 放網路上的圖
-url = 'https://i.imgur.com/X1rrD5p.jpeg'
+url = 'https://i.imgur.com/GwjCqgK.png'
 image_bytes = urlopen(url).read()
 # internal data file
 data_stream = io.BytesIO(image_bytes)
@@ -20,14 +20,12 @@ fname = url.split('/')[-1]
 sf = "{} ({}x{})".format(fname, w, h)
 
 
-
 global risk_level
-global amt
 output = []
 final_list = dict()
 
 def strB2Q(s):
-    """把字串半形轉全形"""
+    # 把字串半形轉全形
     rstring = ""
     for uchar in s:
         u_code = ord(uchar)
@@ -37,6 +35,7 @@ def strB2Q(s):
             u_code += 65248
         rstring += chr(u_code)
     return rstring
+
 
 def result():
     global amt  #標的個數
@@ -83,6 +82,7 @@ def result():
         
     return rresult
 
+
 class Project(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -102,16 +102,17 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, master)
         self.grid()
         self.createWidgets()
-        self.btu1 = tk.Button(self, text="開始",
-                              command=lambda: master.switch_frame(PageOne))
+        f1 = tkFont.Font(size = 15, family="bahnschrift")
+        self.btu1 = tk.Button(self, text="Get started!",
+                              command=lambda: master.switch_frame(PageOne), bg="#E0FFFF", font=f1)
         self.btu1.grid(row=1, column=0)
         self.btu1.grid_rowconfigure(1, weight=1)
         self.btu1.grid_columnconfigure(1, weight=1)
     def createWidgets(self):
         self.tk_image = ImageTk.PhotoImage(pil_image)
         # put the image on a typical widget
-        self.label = tk.Label(self, image=self.tk_image, bg='brown')
-        self.label.grid(row = 0, column = 0, padx=5, pady=5)
+        self.label = tk.Label(self, image=self.tk_image)
+        self.label.grid(row=0, column=0, padx=5, pady=5)
 
 
 class PageOne(tk.Frame):
@@ -128,7 +129,7 @@ class PageOne(tk.Frame):
     def createWidgets(self):
         # 9題題目與選項
         valueq1 = tk.IntVar()
-        self.lblq1 = tk.Label(self, text='1. 如果我的投資價值超過20%，我會感到不安。',
+        self.lblq1 = tk.Label(self, text='1. 如果我的投資價值超過20%，我會感到不安。'+" "*125,
                               bg='Thistle')
         self.rdiq11 = tk.Radiobutton(self, text='非常同意', variable=valueq1,
                                      value=1)
@@ -148,7 +149,7 @@ class PageOne(tk.Frame):
         self.rdiq15.grid(row=1, column=4, sticky=tk.W)
 
         valueq2 = tk.IntVar()
-        self.lblq2 = tk.Label(self, text='2. 為了能獲得更高的報酬，我願意接受較高的風險。',
+        self.lblq2 = tk.Label(self, text='2. 為了能獲得更高的報酬，我願意接受較高的風險。'+" "*117,
                               bg='Thistle')
         self.rdiq21 = tk.Radiobutton(self, text='非常不同意', variable=valueq2,
                                      value=1)
@@ -168,7 +169,7 @@ class PageOne(tk.Frame):
         self.rdiq25.grid(row=3, column=4, sticky=tk.W)
 
         valueq3 = tk.IntVar()
-        self.lblq3 = tk.Label(self, text='3. 您平時多久調整一次您的投資組合(指的是大方向的資產配置，而不是個股的選擇) ?',
+        self.lblq3 = tk.Label(self, text='3. 您平時多久調整一次您的投資組合(指的是大方向的資產配置，而不是個股的選擇) ?'+" "*59,
                               bg='Thistle')
         self.rdiq31 = tk.Radiobutton(self, text='只要一有損失就調整', variable=valueq3,
                                      value=1)
@@ -188,7 +189,7 @@ class PageOne(tk.Frame):
         self.rdiq35.grid(row=5, column=4, sticky=tk.W)
 
         valueq4 = tk.IntVar()
-        self.lblq4 = tk.Label(self, text='4. 我要追求長期報酬，我可以忍受短期的價值波動。',
+        self.lblq4 = tk.Label(self, text='4. 我要追求長期報酬，我可以忍受短期的價值波動。'+" "*117,
                               bg='Thistle')
         self.rdiq41 = tk.Radiobutton(self, text='非常不同意', variable=valueq4,
                                      value=1)
@@ -208,7 +209,7 @@ class PageOne(tk.Frame):
         self.rdiq45.grid(row=7, column=4, sticky=tk.W)
 
         valueq5 = tk.IntVar()
-        self.lblq5 = tk.Label(self, text='5. 您對風險的接受程度 :', bg='Thistle')
+        self.lblq5 = tk.Label(self, text='5. 您對風險的接受程度 :'+" "*167, bg='Thistle')
         self.rdiq51 = tk.Radiobutton(self, text='極低風險接受者', variable=valueq5,
                                      value=1)
         self.rdiq52 = tk.Radiobutton(self, text='低風險接受者', variable=valueq5,
@@ -227,7 +228,7 @@ class PageOne(tk.Frame):
         self.rdiq55.grid(row=9, column=4, sticky=tk.W)
 
         valueq6 = tk.IntVar()
-        self.lblq6 = tk.Label(self, text='6. 您對金融市場及金融實務的了解 :', bg='Thistle')
+        self.lblq6 = tk.Label(self, text='6. 您對金融市場及金融實務的了解 :'+" "*147, bg='Thistle')
         self.rdiq61 = tk.Radiobutton(self, text='不清楚也沒興趣', variable=valueq6,
                                      value=1)
         self.rdiq62 = tk.Radiobutton(self, text='不是很清楚', variable=valueq6,
@@ -246,7 +247,7 @@ class PageOne(tk.Frame):
         self.rdiq65.grid(row=16, column=0, columnspan=5, sticky=tk.W)
 
         valueq7 = tk.IntVar()
-        self.lblq7 = tk.Label(self, text='7. 我投資最大的要求是保值，安全；這比獲利更重要。',
+        self.lblq7 = tk.Label(self, text='7. 我投資最大的要求是保值，安全；這比獲利更重要。'+" "*113,
                               bg='Thistle')
         self.rdiq71 = tk.Radiobutton(self, text='非常同意', variable=valueq7,
                                      value=1)
@@ -266,7 +267,7 @@ class PageOne(tk.Frame):
         self.rdiq75.grid(row=18, column=4, sticky=tk.W)
 
         valueq8 = tk.IntVar()
-        self.lblq8 = tk.Label(self, text='8. 當您做完一項投資決策後，您的感覺是 :',
+        self.lblq8 = tk.Label(self, text='8. 當您做完一項投資決策後，您的感覺是 :'+" "*135,
                               bg='Thistle')
         self.rdiq81 = tk.Radiobutton(self, text='非常擔心', variable=valueq8,
                                      value=1)
@@ -286,7 +287,7 @@ class PageOne(tk.Frame):
         self.rdiq85.grid(row=20, column=4, sticky=tk.W)
 
         valueq9 = tk.IntVar()
-        self.lblq9 = tk.Label(self, text='9. 長期來看，高風險會有高報酬補償，如果您做一個10-20年期的投資，您會選擇下列何者 ?', bg='Thistle')
+        self.lblq9 = tk.Label(self, text='9. 長期來看，高風險會有高報酬補償，如果您做一個10-20年期的投資，您會選擇下列何者 ?'+" "*47, bg='Thistle')
         self.rdiq91 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-2%~11%之間，平均年報酬是4.1%', variable=valueq9, value=1)
         self.rdiq92 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-5%~14%之間，平均年報酬是4.7%', variable=valueq9, value=2)
         self.rdiq93 = tk.Radiobutton(self, text='有一投資每10年會有一次負報酬，但每年報酬介在-7%~17%之間，平均年報酬是5.0%', variable=valueq9, value=3)
@@ -299,9 +300,8 @@ class PageOne(tk.Frame):
         self.rdiq94.grid(row=25, column=0, columnspan=5, sticky=tk.W)
         self.rdiq95.grid(row=26, column=0, columnspan=5, sticky=tk.W)
 
-        # Get所使用者回答之value並相加
-
-        def sum():  # 先get所有題目的權重並相加
+        # 先get所有題目的權重並相加
+        def sum():
             global risk_level
 
             weight1 = valueq1.get()
@@ -315,18 +315,22 @@ class PageOne(tk.Frame):
             weight9 = valueq9.get()
             total_weight = (weight1 + weight2 + weight3 + weight4 + weight5 +
                             weight6 + weight7 + weight8 + weight9)
-            risk_level = total_weight
-            total_weight_str = str(total_weight)
-            return total_weight_str  # 回傳最後相加的value
+            if weight1==0 or weight2==0 or weight3==0 or weight4==0 or weight5==0 or weight6==0 or weight7==0 or weight8==0 or  weight9==0:
+                total_weight_str = "    您還沒填完所有題目喔!"
+            else:
+                total_weight_str = str(total_weight)
+            # 回傳最後相加的value
+            return total_weight_str
 
-        def update():  # 更新風險權重的函數，會使用在按鈕上
+        # 更新風險權重的函數，會使用在按鈕上
+        def update():
             weight_value.set(sum())
-
-        weight_value = tk.StringVar()  # 設定風險權重的資料型態跟初始值
+        # 設定風險權重的資料型態跟初始值
+        weight_value = tk.StringVar()
         weight_value.set(sum())
 
         # 利用按鈕更新獲得的value
-        self.lblan = tk.Button(self, text=str('您的風險趨避程度為'),
+        self.lblan = tk.Button(self, text=str('您的風險趨避程度為'), bg="Thistle",
                                command=lambda: [sum(), update()])
         self.vale = tk.Label(self, textvariable=weight_value)
 
@@ -381,8 +385,8 @@ class PageTwo(tk.Frame):
         self.entry3_1.grid(row=9, column=1)
         self.entry3_2.grid(row=9, column=3)
         
-
-        def getbudget1():  # get輸入進來的數字們
+        # get輸入進來的數字們
+        def getbudget1():
             low = entry1__1.get()
             return low
         def getbudget2():
@@ -398,29 +402,30 @@ class PageTwo(tk.Frame):
             high_p = entry3__2.get()
             return high_p
         
-        def update():  # 寫更新函式，一樣會用在按鈕上
+        # 寫更新函式，一樣會用在按鈕上
+        def update():
             budget_low.set(getbudget1())
             budget_high.set(getbudget2())
             target_amount.set(gettaramount())
             price_low.set(gettarprice1())
             price_high.set(gettarprice2())
-            
-        def get_final_data():  # 把資料轉換型態以便之後計算的函式
-            global amt
+        
+        # 把資料轉換型態以便之後計算的函式
+        def get_final_data():
+
             final_list['bug1'] = float(getbudget1())
             final_list['bug2'] = float(getbudget2())
             final_list['amt'] = int(gettaramount())
-            amt = int(gettaramount())
             final_list['price1'] = float(gettarprice1())
             final_list['price2'] = float(gettarprice2())
 
             print(type(risk_level))
             print(final_list)
     
-
-        budget_low = tk.IntVar()  # 設定初始資料型態及初始值
+        # 設定初始資料型態及初始值
+        budget_low = tk.IntVar()
         budget_high = tk.IntVar()
-        target_amount = tk.IntVar()
+        target_amount = tk.IntVar()        
         price_low = tk.IntVar()
         price_high = tk.IntVar()
         
@@ -430,7 +435,8 @@ class PageTwo(tk.Frame):
         price_low.set(gettarprice1())
         price_high.set(gettarprice2())
         
-        self.lblan = tk.Button(self, text=str('儲存資料'),  # 執行所有函式的按鈕
+        # 執行所有函式的按鈕
+        self.lblan = tk.Button(self, text=str('儲存資料'), bg="Thistle",
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
         self.lblan.grid(row=98, column=2)
    
@@ -440,13 +446,12 @@ class PageThree(tk.Frame):
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageTwo))
         self.btu_frontpage.grid(row=99, column=1)
-        
         f1 = tkFont.Font(size=10)
-        
         risk_type = tk.StringVar()  # 設定需要呈現的字串資料型態
-        target_list = tk.StringVar()
+        lst1 = tk.StringVar()
         
-        def risk_1():  # 以風險權重決定出來字串，會放在Label上
+        # 以風險權重決定出來字串，會放在Label上
+        def risk_1():
             if 0 <= risk_level <= 15 :
                 risk_type = '您是低風險接受者'
 
@@ -458,19 +463,15 @@ class PageThree(tk.Frame):
             return risk_type
 
         risk_type.set(risk_1())  # 設定呈現出的值
-        target_list.set(result())
-
+        lst1.set(result())
     
-        self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font = f1)  # 最後做出所有Label
+        # 最後做出所有Label
+        self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font=f1)
         self.type.grid(row=2, column=0)
-        self.type = tk.Label(self, text = "推薦您投資下列標的", bg='Thistle', font = f1)
+        self.type = tk.Label(self, text = "推薦您投資下列標的", bg='Thistle', font=f1)
         self.type.grid(row=3, column=0)
-        self.type = tk.Label(self, textvariable = target_list, bg='Thistle', font = f1)
+        self.type = tk.Label(self, textvariable = lst1, bg='Thistle', font=f1)
         self.type.grid(row=4, column=0)
-
-
-
-
 
 
 if __name__ == "__main__":
