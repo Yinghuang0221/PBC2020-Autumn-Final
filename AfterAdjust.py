@@ -419,8 +419,8 @@ class PageTwo(tk.Frame):
             final_list['price1'] = float(gettarprice1())
             final_list['price2'] = float(gettarprice2())
             amt = gettaramount()
-            print(type(risk_level))
-            print(final_list)
+            #print(type(risk_level))
+            #print(final_list)
     
         # 設定初始資料型態及初始值
         budget_low = tk.IntVar()
