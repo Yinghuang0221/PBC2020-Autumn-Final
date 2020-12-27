@@ -65,8 +65,8 @@ def result():
             available_list.append([csv_list[i][1] , csv_list[i][3]])
     if len(available_list) < amt:
         amt = len(available_list)
-    if amt > 25:
-        amt = 25
+    if amt > 16:
+        amt = 16
 
     
     llist = random.sample(available_list , amt) # 隨機抽樣推薦
