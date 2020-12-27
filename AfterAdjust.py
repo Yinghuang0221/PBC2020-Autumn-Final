@@ -4,8 +4,7 @@ from PIL import Image, ImageTk
 from urllib.request import urlopen
 import io
 import csv
-
-# 放網路上的圖為封面圖片
+# 放網路上的圖
 url = 'https://i.imgur.com/X1rrD5p.jpeg'
 image_bytes = urlopen(url).read()
 # internal data file
@@ -19,9 +18,24 @@ w, h = pil_image.size
 fname = url.split('/')[-1]
 sf = "{} ({}x{})".format(fname, w, h)
 
+
+
 global risk_level
+
 output = []
 final_list = dict()
+
+def strB2Q(s):
+    """把字串半形轉全形"""
+    rstring = ""
+    for uchar in s:
+        u_code = ord(uchar)
+        if u_code == 32:  # 全形空格直接轉換
+            u_code = 12288
+        elif 33 <= u_code <= 126:  # 全形字元（除空格）根據關係轉化
+            u_code += 65248
+        rstring += chr(u_code)
+    return rstring
 
 def result():
     output = []
@@ -31,23 +45,32 @@ def result():
         filename = 'mid_risk_list.csv'
     elif 31 <= risk_level <= 45 :      
         filename = 'high_risk_list.csv'
-    
     count = 0
     csv_list = []
-    with open (file=filename, mode='r', encoding="utf-8-sig") as csvfile :
+    with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
         csvf = csv.reader(csvfile)
         for line in csvf :
             csv_list.append(line)
             
-    for i in range(1, len(csv_list)):
+    for i in range(1 , len(csv_list)):
         csv_list[i][3] = float(csv_list[i][3])
         if count >= final_list["amt"]:
             break
         else:
             if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
-              output.append([csv_list[i][1], csv_list[i][3]])  
+              output.append([csv_list[i][1] , csv_list[i][3]])  
             count += 1        
-    print(output)
+    
+    rresult = ''
+    for data in output:
+        string = strB2Q(data[0])
+        space = 2 * (20 - len(string))
+        #print(len(data[0]) , space)
+        #space = data[0] + space[len(data[0]):]
+        
+        rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'
+        
+    return rresult
 
 
 class Project(tk.Tk):
@@ -266,10 +289,11 @@ class PageOne(tk.Frame):
         self.rdiq94.grid(row=25, column=0, columnspan=5, sticky=tk.W)
         self.rdiq95.grid(row=26, column=0, columnspan=5, sticky=tk.W)
 
-       
-       # Get所使用者回答之value並相加
+        # Get所使用者回答之value並相加
+
         def sum():
             global risk_level
+
             weight1 = valueq1.get()
             weight2 = valueq2.get()
             weight3 = valueq3.get()
@@ -283,12 +307,6 @@ class PageOne(tk.Frame):
                             weight6 + weight7 + weight8 + weight9)
             risk_level = total_weight
             total_weight_str = str(total_weight)
-            
-            # 檢查使用者是否填完所有題目，回傳結果
-            if weight1==0 or weight2==0 or weight3==0 or weight4==0 or weight5==0 or weight6==0 or weight7==0 or weight8==0 or  weight9==0:
-                total_weight_str = "  您還沒填完所有題目喔!"
-            else:
-                total_weight_str = str(total_weight)
             return total_weight_str
 
         def update():
@@ -301,6 +319,7 @@ class PageOne(tk.Frame):
         self.lblan = tk.Button(self, text=str('您的風險趨避程度為'),
                                command=lambda: [sum(), update()])
         self.vale = tk.Label(self, textvariable=weight_value)
+
         self.vale.grid(row=98, column=3)
         self.lblan.grid(row=98, column=2)
 
@@ -353,6 +372,7 @@ class PageTwo(tk.Frame):
         self.entry3_2.grid(row=9, column=3)
         
         # 利用按鈕更新獲得的value
+
         def getbudget1():
             low = entry1__1.get()
             return low
@@ -377,11 +397,13 @@ class PageTwo(tk.Frame):
             price_high.set(gettarprice2())
             
         def get_final_data():
+
             final_list['bug1'] = float(getbudget1())
             final_list['bug2'] = float(getbudget2())
             final_list['amt'] = int(gettaramount())
             final_list['price1'] = float(gettarprice1())
             final_list['price2'] = float(gettarprice2())
+
             print(type(risk_level))
             print(final_list)
     
@@ -401,11 +423,40 @@ class PageTwo(tk.Frame):
         self.lblan = tk.Button(self, text=str('儲存資料'),
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
         self.lblan.grid(row=98, column=2)
-  
-  
+   
 class PageThree(tk.Frame):
     def __init__(self, master):
-        tk.Frame.__init__(self, master)        
+        tk.Frame.__init__(self, master)
+        self.btu_frontpage = tk.Button(self, text="上一步",
+                                       command=lambda: master.switch_frame(PageTwo))
+        self.btu_frontpage.grid(row=99, column=1)
+        f1 = tkFont.Font(size=10)
+        risk_type = tk.StringVar()
+        lst1 = tk.StringVar()
+        def risk_1():
+            if 0 <= risk_level <= 15 :
+                risk_type = '您是低風險接受者'
+
+            elif 16 <= risk_level <= 30 :
+                risk_type = '您是中等風險接受者'
+
+            elif 31 <= risk_level <= 45 :      
+                risk_type = '您是高風險接受者'
+            return risk_type
+
+        risk_type.set(risk_1())
+        lst1.set(result())
+
+    
+        self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font = f1)
+        self.type.grid(row=2, column=0)
+        self.type = tk.Label(self, textvariable = lst1, bg='Thistle', font = f1)
+        self.type.grid(row=3, column=0)
+
+
+
+
+
 
 if __name__ == "__main__":
     app = Project()
