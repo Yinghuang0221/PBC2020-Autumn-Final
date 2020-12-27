@@ -321,23 +321,23 @@ class PageTwo(tk.Frame):
 
         def getbudget1():
             low = entry1__1.get()
-            print(low)
+ 
             return low
         def getbudget2():
             high = entry1__2.get()
-            print(high)
+
             return high
         def gettaramount():
             taramount = entry2__1.get()
-            print(taramount)
+
             return taramount
         def gettarprice1():
             low_p = entry3__1.get()
-            print(low_p)
+
             return low_p
         def gettarprice2():
             high_p = entry3__2.get()
-            print(high_p)
+
             return high_p
         
         def update():
