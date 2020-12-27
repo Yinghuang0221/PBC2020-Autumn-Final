@@ -39,40 +39,47 @@ def strB2Q(s):
     return rstring
 
 def result():
-    global amt
-    output = []
+    global amt  #標的個數
+    available_list = []  #可行的標的
+    #######依風險程度決定讀中高低檔#############
     if 0 <= risk_level <= 15 :
         filename = 'low_risk_list.csv'
     elif 16 <= risk_level <= 30 :
         filename = 'mid_risk_list.csv'
     elif 31 <= risk_level <= 45 :      
         filename = 'high_risk_list.csv'
+    #######依風險程度決定讀中高低檔#############結束
+    
+    ######將csv內容讀進陣列#####
     csv_list = []
     with open (file = filename , mode = 'r' , encoding = "utf-8-sig") as csvfile :
         csvf = csv.reader(csvfile)
         for line in csvf :
             csv_list.append(line)
-            
+    ##########結束############
+    
+    #########新增可行標的之陣列#########
     for i in range(1 , len(csv_list)):
         csv_list[i][3] = float(csv_list[i][3])       
         if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
             #num = len(output) + 1
-            output.append([csv_list[i][1] , csv_list[i][3]])  
+            available_list.append([csv_list[i][1] , csv_list[i][3]])  
     
     
-    llist = random.sample(output , amt)
-    
-    rresult = ''
+    llist = random.sample(available_list , amt) #隨機抽樣推薦
+    ##輸出部分#####
+    rresult = ''  #最終輸出之陣列
     for data in llist:
+        ##半形英文字轉全形，較易閱讀
         string = strB2Q(data[0])
         space = 2 * (20 - len(string))
         #print(len(data[0]) , space)
         #space = data[0] + space[len(data[0]):]
         
+        ##每一筆資料結束後換行
         rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'
         
     return rresult
-    
 
 class Project(tk.Tk):
     def __init__(self):
@@ -292,7 +299,7 @@ class PageOne(tk.Frame):
 
         # Get所使用者回答之value並相加
 
-        def sum():
+        def sum():  # 先get所有題目的權重並相加
             global risk_level
 
             weight1 = valueq1.get()
@@ -308,12 +315,12 @@ class PageOne(tk.Frame):
                             weight6 + weight7 + weight8 + weight9)
             risk_level = total_weight
             total_weight_str = str(total_weight)
-            return total_weight_str
+            return total_weight_str  # 回傳最後相加的value
 
-        def update():
+        def update():  # 更新風險權重的函數，會使用在按鈕上
             weight_value.set(sum())
 
-        weight_value = tk.StringVar()
+        weight_value = tk.StringVar()  # 設定風險權重的資料型態跟初始值
         weight_value.set(sum())
 
         # 利用按鈕更新獲得的value
@@ -372,9 +379,8 @@ class PageTwo(tk.Frame):
         self.entry3_1.grid(row=9, column=1)
         self.entry3_2.grid(row=9, column=3)
         
-        # 利用按鈕更新獲得的value
 
-        def getbudget1():
+        def getbudget1():  # get輸入進來的數字們
             low = entry1__1.get()
             return low
         def getbudget2():
@@ -390,14 +396,14 @@ class PageTwo(tk.Frame):
             high_p = entry3__2.get()
             return high_p
         
-        def update():
+        def update():  # 寫更新函式，一樣會用在按鈕上
             budget_low.set(getbudget1())
             budget_high.set(getbudget2())
             target_amount.set(gettaramount())
             price_low.set(gettarprice1())
             price_high.set(gettarprice2())
             
-        def get_final_data():
+        def get_final_data():  # 把資料轉換型態以便之後計算的函式
             global amt
             final_list['bug1'] = float(getbudget1())
             final_list['bug2'] = float(getbudget2())
@@ -410,9 +416,9 @@ class PageTwo(tk.Frame):
             print(final_list)
     
 
-        budget_low = tk.IntVar()
+        budget_low = tk.IntVar()  # 設定初始資料型態及初始值
         budget_high = tk.IntVar()
-        target_amount = tk.IntVar()        
+        target_amount = tk.IntVar()
         price_low = tk.IntVar()
         price_high = tk.IntVar()
         
@@ -422,7 +428,7 @@ class PageTwo(tk.Frame):
         price_low.set(gettarprice1())
         price_high.set(gettarprice2())
         
-        self.lblan = tk.Button(self, text=str('儲存資料'),
+        self.lblan = tk.Button(self, text=str('儲存資料'),  # 執行所有函式的按鈕
                                command=lambda: [getbudget1(), getbudget2(),gettaramount(),gettarprice1(),gettarprice2(),update(),get_final_data(),result()])
         self.lblan.grid(row=98, column=2)
    
@@ -432,10 +438,13 @@ class PageThree(tk.Frame):
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageTwo))
         self.btu_frontpage.grid(row=99, column=1)
+        
         f1 = tkFont.Font(size=10)
-        risk_type = tk.StringVar()
-        lst1 = tk.StringVar()
-        def risk_1():
+        
+        risk_type = tk.StringVar()  # 設定需要呈現的字串資料型態
+        target_list = tk.StringVar()
+        
+        def risk_1():  # 以風險權重決定出來字串，會放在Label上
             if 0 <= risk_level <= 15 :
                 risk_type = '您是低風險接受者'
 
@@ -446,15 +455,15 @@ class PageThree(tk.Frame):
                 risk_type = '您是高風險接受者'
             return risk_type
 
-        risk_type.set(risk_1())
-        lst1.set(result())
+        risk_type.set(risk_1())  # 設定呈現出的值
+        target_list.set(result())
 
     
-        self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font = f1)
+        self.type = tk.Label(self, textvariable = risk_type, bg='Thistle', font = f1)  # 最後做出所有Label
         self.type.grid(row=2, column=0)
         self.type = tk.Label(self, text = "推薦您投資下列標的", bg='Thistle', font = f1)
         self.type.grid(row=3, column=0)
-        self.type = tk.Label(self, textvariable = lst1, bg='Thistle', font = f1)
+        self.type = tk.Label(self, textvariable = target_list, bg='Thistle', font = f1)
         self.type.grid(row=4, column=0)
 
 
