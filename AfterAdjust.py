@@ -77,7 +77,7 @@ def result():
         # space = data[0] + space[len(data[0]):]
         
         # 每一筆資料結束後換行
-        rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'
+        rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n'+ '\n'
     return rresult
 
 
