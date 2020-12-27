@@ -60,7 +60,7 @@ def result():
     # 新增可行標的之陣列
     for i in range(1 , len(csv_list)):
         csv_list[i][3] = float(csv_list[i][3])       
-        if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]:
+        if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"]  and (final_list["price1"] <= csv_list[i][3] <= final_list["price2"]):
             # num = len(output) + 1
             available_list.append([csv_list[i][1] , csv_list[i][3]])
     if len(available_list) < amt:
