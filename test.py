@@ -483,11 +483,11 @@ class PageThree(tk.Frame):
 
         # 最後做出所有Label
         self.type = tk.Label(self, textvariable=risk_type, bg='Thistle', font=f1)
-        self.type.grid(row=2, column=0, rowspan=2)
+        self.type.grid(row=2, column=0)
         self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :", font=f2)
-        self.type.grid(row=4, column=0, rowspan=2)
+        self.type.grid(row=3, column=0, rowspan=2)
         self.type = tk.Label(self, textvariable=lst1, font=f2)
-        self.type.grid(row=6, column=0, rowspan=2, sticky=tk.W)
+        self.type.grid(row=4, column=0, rowspan=2, sticky=tk.W)
 
 
 # 設定工具名稱、呈現的大小、畫面置中與執行
