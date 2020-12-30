@@ -63,7 +63,7 @@ def result():
         csv_list[i][3] = float(csv_list[i][3])
         if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"] and (final_list["price1"] <= csv_list[i][3] <= final_list["price2"]):
             # num = len(output) + 1
-            available_list.append([csv_list[i][1], csv_list[i][3]])
+            available_list.append([csv_list[i][1], " ", csv_list[i][3]])
 
     if len(available_list) < amt:
         amt = len(available_list)
@@ -75,7 +75,7 @@ def result():
     rresult = ''  # 最終輸出之陣列
     for data in llist:
         string = str(data[0]).strip()
-        price = str(data[1]).strip()
+        price = str(data[2]).strip()
         space = 2 * (20 - len(string))
         # print(len(data[0]) , space)
         # space = data[0] + space[len(data[0]):]
@@ -484,7 +484,7 @@ class PageThree(tk.Frame):
         # 最後做出所有Label
         self.type = tk.Label(self, textvariable=risk_type, bg='Thistle', font=f1)
         self.type.grid(row=0, column=0)
-        self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :"+ "\n", bg='Thistle', font=f2)
+        self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :"+ "\n", font=f2)
         self.type.grid(row=1, column=0, rowspan=2)
         self.type = tk.Label(self, textvariable=lst1, font=f2)
         self.type.grid(row=3, column=0, rowspan=2)
