@@ -74,14 +74,14 @@ def result():
     llist = random.sample(available_list, amt)  # 隨機抽樣推薦
     rresult = ''  # 最終輸出之陣列
     for data in llist:
-        string = str(data[0]).strip()
-        price = str(data[1]).strip()
-        space = 30 - len(string)
+        # 半形英文字轉全形，較易閱讀
+        string = strB2Q(data[0]).strip()
+        space = 2 * (20 - len(string))
         # print(len(data[0]) , space)
         # space = data[0] + space[len(data[0]):]
 
         # 每一筆資料結束後換行
-        rresult += string + ' ' * space + '價格: ' + price + '\n' + '\n'
+        rresult += string + ' ' * space + '價格: ' + str(data[1]) + '\n' + '\n'
     return rresult
 
 
@@ -484,7 +484,7 @@ class PageThree(tk.Frame):
         # 最後做出所有Label
         self.type = tk.Label(self, textvariable=risk_type, bg='Thistle', font=f1)
         self.type.grid(row=0, column=0)
-        self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :"+ "\n", font=f2)
+        self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :"+"\n", font=f2)
         self.type.grid(row=1, column=0, rowspan=2)
         self.type = tk.Label(self, textvariable=lst1, font=f2)
         self.type.grid(row=3, column=0, rowspan=2)
