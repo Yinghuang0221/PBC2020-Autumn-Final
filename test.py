@@ -460,7 +460,7 @@ class PageThree(tk.Frame):
         self.btu_frontpage = tk.Button(self, text="上一步",
                                        command=lambda: master.switch_frame(PageTwo))
         self.btu_frontpage.grid(row=99, column=0)
-        f1 = tkFont.Font(size=20)
+        f1 = tkFont.Font(size=20, family="STFangsong")
         f2 = tkFont.Font(size=13)
         risk_type = tk.StringVar()  # 設定需要呈現的字串資料型態
         lst1 = tk.StringVar()
