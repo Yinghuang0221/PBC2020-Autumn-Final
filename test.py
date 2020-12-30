@@ -485,7 +485,7 @@ class PageThree(tk.Frame):
         self.type = tk.Label(self, textvariable=risk_type, bg='Thistle', font=f1)
         self.type.grid(row=2, column=0)
         self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :", font=f2)
-        self.type.grid(row=3, column=0, rowspan=2)
+        self.type.grid(row=3, column=0, rowspan=3)
         self.type = tk.Label(self, textvariable=lst1, font=f2)
         self.type.grid(row=5, column=0, rowspan=2, sticky=tk.W)
 
