@@ -487,7 +487,7 @@ class PageThree(tk.Frame):
         self.type = tk.Label(self, text="依據您的條件，我們推薦您投資下列標的 :", font=f2)
         self.type.grid(row=3, column=0, rowspan=2)
         self.type = tk.Label(self, textvariable=lst1, font=f2)
-        self.type.grid(row=4, column=0, rowspan=2, sticky=tk.W)
+        self.type.grid(row=5, column=0, rowspan=2, sticky=tk.W)
 
 
 # 設定工具名稱、呈現的大小、畫面置中與執行
