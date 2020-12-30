@@ -63,7 +63,7 @@ def result():
         csv_list[i][3] = float(csv_list[i][3])
         if final_list["bug1"] <= csv_list[i][3] <= final_list["bug2"] and (final_list["price1"] <= csv_list[i][3] <= final_list["price2"]):
             # num = len(output) + 1
-            available_list.append([csv_list[i][1], " ", csv_list[i][3]])
+            available_list.append([csv_list[i][1], csv_list[i][3]])
 
     if len(available_list) < amt:
         amt = len(available_list)
@@ -75,8 +75,8 @@ def result():
     rresult = ''  # 最終輸出之陣列
     for data in llist:
         string = str(data[0]).strip()
-        price = str(data[2]).strip()
-        space = 2 * (20 - len(string))
+        price = str(data[1]).strip()
+        space = 30 - len(string)
         # print(len(data[0]) , space)
         # space = data[0] + space[len(data[0]):]
 
