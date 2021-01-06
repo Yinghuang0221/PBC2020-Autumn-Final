@@ -103,4 +103,39 @@ for i in range(math.ceil(len(stock_list)/4)):
     high_risk_list.append(stock_list[min_idx])
     stock_variation_list[min_idx] = 3
 
+#將三種風險名單存為CSV
+h_name = []
+h_var = []
+h_pri = []    
+for i in range(len(high_risk_list)):
+    h_name.append(high_risk_list[i][0])
+    h_var.append(high_risk_list[i][1])
+    h_pri.append(high_risk_list[i][2])
+data = {'name':h_name , 'var':h_var , 'price':h_pri}
 
+high_df = pd.DataFrame(data)
+high_df.to_csv("high_risk_list" + ".csv" , encoding="utf_8_sig")
+
+m_name = []
+m_var = []
+m_pri = []    
+for i in range(len(mid_risk_list)):
+    m_name.append(mid_risk_list[i][0])
+    m_var.append(mid_risk_list[i][1])
+    m_pri.append(mid_risk_list[i][2])
+data = {'name':m_name , 'var':m_var , 'price':m_pri}
+
+mid_df = pd.DataFrame(data)
+mid_df.to_csv("mid_risk_list" + ".csv" , encoding="utf_8_sig")
+
+l_name = []
+l_var = []
+l_pri = []    
+for i in range(len(low_risk_list)):
+    l_name.append(low_risk_list[i][0])
+    l_var.append(low_risk_list[i][1])
+    l_pri.append(low_risk_list[i][2])
+data = {'name':l_name , 'var':l_var , 'price':l_pri}
+
+low_df = pd.DataFrame(data)
+low_df.to_csv("low_risk_list" + ".csv" , encoding="utf_8_sig")
