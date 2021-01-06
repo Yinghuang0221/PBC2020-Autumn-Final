@@ -86,21 +86,21 @@ print(len(stock_list))
 high_risk_list = []
 mid_risk_list = []
 low_risk_list = []
-
+#輸出低風險名單
 for i in range(math.ceil(len(stock_list)/4)):
     if stock_variation_list[i] != "ERROR":
         min_idx = stock_variation_list.index(min(stock_variation_list))
         low_risk_list.append(stock_list[min_idx])
         stock_variation_list[min_idx] = 3
-
+#輸出中風險名單
 for i in range(math.ceil(len(stock_list)/2)):
     min_idx = stock_variation_list.index(min(stock_variation_list))
     mid_risk_list.append(stock_list[min_idx])
     stock_variation_list[min_idx] = 3
-
+#輸出高風險名單
 for i in range(math.ceil(len(stock_list)/4)):
     min_idx = stock_variation_list.index(min(stock_variation_list))
     high_risk_list.append(stock_list[min_idx])
     stock_variation_list[min_idx] = 3
 
-print(high_risk_list)
+
